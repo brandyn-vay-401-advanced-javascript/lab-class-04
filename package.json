@@ -1,0 +1,29 @@
+{
+  "name": "lab-class-04",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "lint": "eslint **/*.js",
+    "test": "jest --verbose --coverage"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/brandyn-vay-401-advanced-javascript/lab-class-04.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/brandyn-vay-401-advanced-javascript/lab-class-04/issues"
+  },
+  "homepage": "https://github.com/brandyn-vay-401-advanced-javascript/lab-class-04#readme",
+  "devDependencies": {
+    "eslint": "^6.0.1",
+    "jest": "^24.8.0"
+  },
+  "dependencies": {
+    "uuid": "^3.3.2"
+  }
+}

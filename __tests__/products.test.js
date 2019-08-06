@@ -1,28 +1,29 @@
-const Categories = require('../categories/categories.js');
+const Products = require('../categories/products.js');
 
-describe('Categories Model', () => {
+describe('Products Model', () => {
 
-  let categories;
+  let products;
 
   beforeEach(() => {
-    categories = new Categories();
+    products = new Products();
   });
 
   // How might we repeat this to check on types?
   it('sanitize() returns undefined with missing requirements', () => {
-    const schema = categories.schema;
+    const schema = products.schema;
     var testRecord = {};
     for (var field in schema) {
       if (schema[field].required) {
         testRecord[field] = null;
       }
     }
-    expect(categories.sanitize(testRecord)).toBeUndefined();
+    console.log(products.sanitize(testRecord));
+    expect(products.sanitize(testRecord)).toBeUndefined();
   });
 
   it('can post() a new category', () => {
     let obj = { name: 'Test Category' };
-    return categories.create(obj)
+    return products.create(obj)
       .then(record => {
         Object.keys(obj).forEach(key => {
           expect(record[key]).toEqual(obj[key]);
@@ -33,9 +34,9 @@ describe('Categories Model', () => {
 
   it('can get() a category', () => {
     let obj = { name: 'Test Category' };
-    categories.create(obj)
+    products.create(obj)
       .then(record => {
-        categories.get(record._id)
+        products.get(record._id)
           .then(category => {
             Object.keys(obj).forEach(key => {
               expect(category[0][key]).toEqual(obj[key]);
@@ -47,11 +48,11 @@ describe('Categories Model', () => {
 
   it('can delete() a category', () => {
     let obj = { name: 'Test Category' };
-    categories.create(obj)
+    products.create(obj)
       .then(record => {
-        return categories.delete(record._id)
+        return products.delete(record._id)
           .then(category => {
-            expect(categories.get(record._id).name).toBeFalsy();
+            expect(products.get(record._id).name).toBeFalsy();
           });
       })
       .catch(err => console.error);
@@ -59,15 +60,14 @@ describe('Categories Model', () => {
 
   it('can update a category', () => {
     let obj = { name: 'Test Category', zoo: true };
-    categories.create(obj)
+    products.create(obj)
       .then(record => {
-        categories.update(record.id, { name: 'New Test Category', id: 55 })
+        products.update(record.id, { name: 'New Test Category', id: 55 })
           .then(category => {
-            categories.get(55)
+            products.get(55)
               .then(zz => {
                 expect(zz.name).toEqual('New Test Category');
-              })
-              .catch(err => console.error);
+              }).catch(err => console.error);
           });
       })
       .catch(err => console.error);
@@ -75,7 +75,7 @@ describe('Categories Model', () => {
 
   it('rejects bad type checks', () => {
     let obj = { name: 555 };
-    categories.create(obj)
+    products.create(obj)
       .then(record => {
         expect(record.id).toBeUndefined();
       })
